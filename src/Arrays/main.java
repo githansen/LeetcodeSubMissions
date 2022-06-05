@@ -2,9 +2,9 @@ package Arrays;
 
 
 import javax.swing.tree.TreeNode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class main {
 
@@ -135,10 +135,130 @@ public class main {
         }
         return sum;
     }
+    // https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+
+        List <Boolean> liste = new ArrayList<>();
+        int max = 0;
+        for(int i: candies){
+            if(i > max) max = i;
+        }
+        for(int i = 0; i < candies.length; i++){
+            if(candies[i] + extraCandies >= max){
+                liste.add(true);
+            }
+            else liste.add(false);
+        }
+        return liste;
+    }
+
+    //https://leetcode.com/problems/flipping-an-image/
+    public int[][] flipAndInvertImage(int[][] image) {
+
+        for(int i=0; i < image.length; i++){
+            flip(image, i);
+        }
+        for(int i = 0; i < image.length; i++){
+            for(int j = 0; j < image[i].length; j++){
+                if(image[i][j] == 0) image[i][j]=1;
+                else image[i][j]=0;
+            }
+        }
+
+        return image;
+    }
+    public void flip(int [][] image, int j){
+        int n = image.length -1;
+        for(int i = 0; i < n; i++){
+            int temp = image[j][i];
+            image[j][i] = image[j][n];
+            image[j][n]=temp;
+            n--;
+        }
+    }
+
+    // https://leetcode.com/problems/contains-duplicate/
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> liste = new HashSet<>();
+        for(int i : nums) liste.add(i);
+
+        return liste.size() != nums.length;
+    }
+    // https://leetcode.com/problems/merge-sorted-array/
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int [] temp = new int[m+n];
+        System.arraycopy(nums1, 0, temp, 0, m);
+        System.arraycopy(nums2, 0, temp, m, n);
+        System.out.println(Arrays.toString(temp));
+        int i = 0;
+        int j = m;
+        int k = 0;
+        while(i < m && j < n+m){
+            if(temp[i] <= temp[j]){
+                nums1[k++] = temp[i++];
+            }
+            else{
+                nums1[k++] = temp[j++];
+            }
+        }
+        while(i < m){
+            nums1[k++] = temp[i++];
+        }
+        while(j<n+m) nums1[k++] = temp[j++];
+
+    }
+        // https://leetcode.com/problems/move-zeroes/
+        public void moveZeroes(int[] nums) {
+            for(int i = 0; i < nums.length; i++){
+                if(nums[i] == 0){
+                    for(int j = i+1; j < nums.length; j++){
+                        if(nums[j] != 0){
+                            swap(nums, i, j);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        public void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+         }
+
+         // https://leetcode.com/problems/find-smallest-letter-greater-than-target/
+         public char nextGreatestLetter(char[] letters, char target) {
+             int i = 0;
+             while(i < letters.length && letters[i] <= target){
+                 i++;
+             }
+             if(i >= letters.length) return letters[0];
+             else return letters[i];
+         }
+         // https://leetcode.com/problems/median-of-two-sorted-arrays
+         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+             int [] temp = new int[nums1.length + nums2.length];
+             int i = 0;
+             int j = 0;
+             int k = 0;
+             while(i < nums1.length && j < nums2.length){
+                 if(nums1[i] <= nums2[j]){
+                     temp[k++] = nums1[i++];
+                 }
+                 else temp[k++] = nums2[j++];
+             }
+             while(i < nums1.length)temp[k++] = nums1[i++];
+             while(j < nums2.length) temp[k++] = nums2[j++];
+             System.out.println(Arrays.toString(temp));
+             if(temp.length % 2 == 0){
+                 return (double) (temp[temp.length/2] + temp[ temp.length/2 -1] )/2;
+             }
+             else{
+                 return temp[temp.length/2];
+             }
+         }
+
     public static void main(String[] args){
-        int [] x = {3,2,2,3};
-        System.out.println(Arrays.toString(x));
-        removeElement(x, 3);
-        System.out.println(Arrays.toString(x));
+
     }
 }
