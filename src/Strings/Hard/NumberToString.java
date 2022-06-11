@@ -1,4 +1,4 @@
-package Easy;
+package Strings.Hard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
