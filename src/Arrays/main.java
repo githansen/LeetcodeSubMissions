@@ -220,7 +220,7 @@ public class main {
                 }
             }
         }
-        public void swap(int[] nums, int i, int j){
+        public static void swap(int[] nums, int i, int j){
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
@@ -257,6 +257,98 @@ public class main {
                  return temp[temp.length/2];
              }
          }
+        //https://leetcode.com/problems
+        public int minDeletionSize(String[] strs) {
+            int sum = 0;
+            for(int i = 0; i < strs[0].length(); i++){
+                if(!issorted(strs, i)) sum++;
+            }
+            return sum;
+        }
+    public boolean issorted(String [] a, int i){
+        for(int j = 1; j < a.length; j++){
+            if(a[j].charAt(i) < a[j-1].charAt(i)) return false;
+        }
+        return true;
+    }
+    //https://leetcode.com/problems/squares-of-a-sorted-array/
+    public int[] sortedSquares(int[] nums) {
+        for(int i = 0; i < nums.length; i++){
+            nums[i] = (int)Math.pow(nums[i],2);
+        }
+        Arrays.sort(nums);
+        return nums;
+    }
+    //https://leetcode.com/problems/find-pivot-index/
+    public int pivotIndex(int[] nums) {
+        for(int i = 0; i < nums.length; i++){
+            if(checksum(nums, i)) return i;
+        }
+        return -1;
+    }
+    public boolean checksum(int [] nums, int i){
+        int vsum = 0;
+        int hsum = 0;
+        for(int j = 0; j < i; j++){
+            vsum += nums[j];
+        }
+        for(int j = i+1; j < nums.length; j++){
+            hsum += nums[j];
+        }
+        return vsum == hsum;
+    }
+
+//https://leetcode.com/problems/largest-number-at-least-twice-of-others/ medium
+public int dominantIndex(int[] nums) {
+    if(nums.length == 1)return 0;
+    int max = Integer.MIN_VALUE;
+    int smax = Integer.MIN_VALUE;
+    int maxindeks=0;
+    int smaxindeks=1;
+    for(int i = 0; i < nums.length; i++){
+        if(nums[i] > smax){
+            if(nums[i] > max){
+                smax = max;
+                smaxindeks = maxindeks;
+                max = nums[i];
+                maxindeks = i;
+            }
+            else{
+                smax = nums[i];
+                smaxindeks = i;
+            }
+        }
+    }
+
+    if(smax * 2 <= max)return maxindeks;
+    else return -1;
+}
+
+//binsøk -> https://leetcode.com/problems/binary-search
+public int search(int[] nums, int target) {
+    int v = 0;
+    int h = nums.length-1;
+    while(v<=h){
+        int m = (v+h)/2;
+        if(nums[m] == target)return m;
+        else if (nums[m] > target){
+            h = m-1;
+        }
+        else v = m+1;
+    }
+    return -1;
+}
+    //https://leetcode.com/problems/sqrtx/
+    public int mySqrt(int x) {
+        if(x==1)return 1;
+        for(long i = 1; i <= x; i++){
+            if(i * i > x){
+                return (int)i-1;
+            }
+
+        }
+        return 0;
+    }
 
     public static void main(String[] args){
 
