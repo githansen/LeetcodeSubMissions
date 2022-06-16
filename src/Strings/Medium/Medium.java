@@ -19,6 +19,7 @@ public class Medium {
     //https://leetcode.com/problems/rotate-array/
     public static void rotate(int[] nums, int k) {
         while(k > nums.length) k -= nums.length;
+        while(k <0) k+= nums.length;
         int[] temp = new int[nums.length];
         System.arraycopy(nums, nums.length-k, temp, 0, k);
         System.arraycopy(nums,0,nums,k,nums.length-k);
@@ -26,10 +27,33 @@ public class Medium {
         System.out.println(Arrays.toString(temp));
         System.out.println(Arrays.toString(nums));
     }
+//https://leetcode.com/problems/longest-substring-without-repeating-characters/
+    public int lengthOfLongestSubstring(String s) {
 
+        int longest = 0;
+        int x [] = new int[256];
+        Arrays.setAll(x, i-> i=0);
+        int antall;
+        for(int i = 0; i < s.length(); i++){
+            antall = 0;
+            for(int j = i; j < s.length(); j++){
+                if(x[s.charAt(j)] == 0){
+                    x[s.charAt(j)] += 1;
+                    antall++;
+                }
+
+                else{
+                    break;
+                }
+            }
+            Arrays.setAll(x, t-> t=0);
+            if(antall > longest) longest = antall;
+        }
+        return longest;
+    }
     public static void main(String[] args){
         int [] x = {1,2,3,4,5};
-
+        rotate(x, -2);
 
     }
 }

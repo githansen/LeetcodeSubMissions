@@ -45,5 +45,21 @@ public class Medium {
         }
         return liste;
     }
+    //https://leetcode.com/problems/two-sum-ii-input-array-is-sorted
+    public int[] twoSum(int[] numbers, int target) {
+        int n1 = 0;
+        int n2 = numbers.length -1;
+        while(n1 < n2){
+            if(numbers[n1] + numbers[n2]>target) n2--;
+            else if(numbers[n1]+numbers[n2]< target){
+                n1++;
+            }
+            else{
+                return new int[]{n1+1, n2+1};
+            }
+        }
+        return new int[]{n1+1, n2+1};
+    }
+
 
 }
