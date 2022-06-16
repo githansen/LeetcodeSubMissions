@@ -51,6 +51,27 @@ public class Medium {
         }
         return longest;
     }
+    // DENNE BLE INEFFEKTIV, GJØR PÅ NYTT SENERE: https://leetcode.com/problems/permutation-in-string/
+    public boolean checkInclusion(String s1, String s2) {
+        int len = s1.length();
+        int [] x = new int[128];
+        Arrays.setAll(x, i -> i = 0);
+        for(int i=0; i < s2.length(); i++){
+            int antall = 0;
+            for(int k = 0; k < len; k++){
+                x[s1.charAt(k)]++;
+            }
+            for(int j = i; j<s2.length() && j < i+len; j++){
+                x[s2.charAt(j)]--;
+            }
+            for(int m = 0; m < x.length; m++){
+                if(x[m] > 0) antall++;
+            }
+            Arrays.setAll(x,n -> n=0);
+            if(antall == 0) return true;
+        }
+        return false;
+    }
     public static void main(String[] args){
         int [] x = {1,2,3,4,5};
         rotate(x, -2);
