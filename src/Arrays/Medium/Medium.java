@@ -61,5 +61,30 @@ public class Medium {
         return new int[]{n1+1, n2+1};
     }
 
+    // https://leetcode.com/problems/container-with-most-water/
+    public int maxArea(int[] height) {
+
+        int left = 0;
+        int right = height.length -1;
+        int biggest = Math.min(height[left], height[right]) * (right-left);
+        while(left < right){
+            if(Math.min(height[left], height[right]) * (right-left) > biggest) biggest = Math.min(height[left], height[right]) * (right-left);
+            if(height[left] < height[right]){
+                left++;
+            }
+            else {
+                right --;
+            }
+        }
+        return biggest;
+    }
+    //https://leetcode.com/problems/search-in-rotated-sorted-array/
+    public int searchrotated(int[] nums, int target) {
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] == target) return i;
+        }
+        return -1;
+    }
+
 
 }
