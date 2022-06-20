@@ -1,8 +1,10 @@
 package Lists.Easy;
 
+import Lists.Medium.ListNode;
+
 public class Easy {
     // https://leetcode.com/problems/reverse-linked-list
-   /* public ListNode reverseList(ListNode head) {
+    public ListNode reverseList(ListNode head) {
         if(head == null || head.next == null) return head;
         ListNode neste = head.next;
         ListNode nyneste = neste.next;
@@ -16,7 +18,7 @@ public class Easy {
             }
         }
         return head;
-    }*/
+    }
     //https://leetcode.com/problems/middle-of-the-linked-list/
   /*  public ListNode middleNode(ListNode head) {
         int antall = 0;
