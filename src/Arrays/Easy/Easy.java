@@ -328,4 +328,19 @@ public class Easy {
         reverse(list, start, list.length - 1);
         return String.valueOf(list);
     }
+        //https://leetcode.com/problems/xor-operation-in-an-array
+        public int xorOperation(int n, int start) {
+            int x[] = new int[n];
+            for(int i = 0; i < n; i++){
+                x[i] = start;
+                start += 2;
+            }
+            int xor = 0;
+            for(int i = 0; i < x.length; i++){
+                xor = xor^x[i];
+            }
+
+            return xor;
+        }
+
 }
